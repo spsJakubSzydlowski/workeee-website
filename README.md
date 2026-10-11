@@ -1,4 +1,4 @@
-<h1>Workeee</h1>
+<h1>Webová stránka pro Workeee</h1>
 
 Týmová nástěnka, která běží u vás
 
