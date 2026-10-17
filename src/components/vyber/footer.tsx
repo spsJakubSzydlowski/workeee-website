@@ -39,7 +39,9 @@ export function Footer({ page = "home" }: { page?: Page }) {
   return (
     <footer className="bg-footer text-ink">
       <div className="wrap @container">
-        <div className="grid gap-12 pt-16 pb-14 md:pt-20 md:pb-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20">
+        {/* Side by side from 1280 px. Narrower, the link columns would squeeze
+            the claims until each of them wraps. */}
+        <div className="grid gap-12 pt-16 pb-14 md:pt-20 md:pb-20 xl:grid-cols-[minmax(0,1fr)_auto] xl:gap-20">
           <div>
             <a href="#top" className="inline-flex items-center gap-2.5 text-[1.0625rem] font-semibold tracking-[-0.02em]">
               <Mark className="h-5 w-auto text-ink [&_rect:last-child]:fill-dot" />

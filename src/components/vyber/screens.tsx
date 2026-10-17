@@ -89,7 +89,7 @@ export function Screens() {
         <Image src={PHOTOS.poleMalbaZelena.src} alt="" fill sizes="100vw" quality={PAINTING_QUALITY} className="object-cover" />
       </div>
       <div className="wrap">
-        <h2 className="display-section mx-auto max-w-[19ch] text-center">Jak se s Workeee pracuje</h2>
+        <h2 className="display-section mx-auto max-w-[19ch] text-center">{tidy("Jak se s Workeee pracuje")}</h2>
         <p className="mx-auto mt-5 max-w-[36rem] text-center text-lg leading-relaxed text-pretty text-grass-soft">
           <Typo>
             Projekt je nástěnka s úkoly. Kliknete na úkol, otevře se jeho detail a diskuse o něm běží přímo pod ním.

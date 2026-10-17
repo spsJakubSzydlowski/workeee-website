@@ -184,13 +184,12 @@
     rotate: -45deg;
   }
 
-  /* The links in a panel under the bar, as dark as the bar. Hidden with
-     visibility, so closed links leave the tab order and the reading order. */
+  /* The links in a panel under the bar, as wide and as dark as the bar. Hidden
+     with visibility, so closed links leave the tab order and the reading order. */
   .nav-panel {
     position: absolute;
     top: calc(100% + 0.5rem);
-    left: 50%;
-    width: min(20rem, calc(100vw - 2rem));
+    inset-inline: 0;
     padding: 0.375rem;
     border-radius: var(--radius-control);
     background-color: var(--color-ink);
@@ -198,7 +197,7 @@
       0 0 0 1px rgb(255 255 255 / 0.2),
       var(--shadow-bar);
     opacity: 0;
-    translate: -50% -0.375rem;
+    translate: 0 -0.375rem;
     visibility: hidden;
     transition:
       opacity 180ms ease-out,
@@ -208,7 +207,7 @@
 
   .nav-panel[data-open="true"] {
     opacity: 1;
-    translate: -50% 0;
+    translate: 0 0;
     visibility: visible;
     transition-delay: 0s;
   }
@@ -766,12 +765,15 @@
     content: attr(data-word);
   }
 
+  /* A pixel past the hero's sides and bottom, where the hero clips it: when
+     those edges fall inside a device pixel (Windows at 125 %, many Android
+     phones), the painting would otherwise show along them as a hairline. */
   .hero-foot {
     position: absolute;
     z-index: 4;
-    inset-inline: 0;
-    bottom: 0;
-    height: var(--foot);
+    inset-inline: -1px;
+    bottom: -1px;
+    height: calc(var(--foot) + 1px);
     border-radius: var(--radius-panel) var(--radius-panel) 0 0;
     background-color: var(--color-surface);
   }
