@@ -4,7 +4,14 @@
     font-optical-sizing: auto;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    scroll-padding-top: 6rem;
+  }
+
+  /* A link to a section lands on the section's top edge, because every
+     section's own top padding already clears the floating bar. What the bar
+     can hide is a control that keyboard focus scrolls into view, so only
+     controls stop 6rem below the top. */
+  :is(a, button, input, select, textarea, [tabindex]) {
+    scroll-margin-top: 6rem;
   }
 
   body {
