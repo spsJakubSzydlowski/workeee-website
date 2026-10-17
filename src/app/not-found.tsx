@@ -1,39 +1,28 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Logo } from "@/components/logo";
-import { tidy } from "@/lib/typography";
+import { ButtonLink } from "@/components/vyber/button-link";
+import { Footer } from "@/components/vyber/footer";
+import { CHANGES_HREF, Nav } from "@/components/vyber/nav";
+import { PageHead } from "@/components/vyber/page-head";
+import { SITE } from "@/lib/workeee";
 
-export const metadata: Metadata = {
-  title: "Stránka nenalezena",
-};
+// Next.js adds noindex to every 404 response by itself.
+export const metadata: Metadata = { title: `Stránka nenalezena | ${SITE.name}` };
 
-// Shown for notFound() calls and for every URL that matches no route.
+/** Any address that does not exist: the page head, and the way back. */
 export default function NotFound() {
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-      <Logo className="size-8" />
-      <h1 className="mt-8 text-4xl leading-[1.1] font-bold tracking-tighter text-slate-900 sm:text-5xl">
-        Tady nic není
-      </h1>
-      <p className="mt-4 max-w-md text-base leading-6 text-balance text-slate-600">
-        {tidy(
-          "Stránka na této adrese neexistuje. Možná se změnila, nebo je odkaz přepsaný jen zčásti.",
-        )}
-      </p>
-      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Link
-          href="/"
-          className="inline-flex h-10 items-center rounded bg-brand px-4 text-sm font-semibold text-white transition-[filter] duration-200 ease-out hover:brightness-110"
-        >
-          Zpět na úvod
-        </Link>
-        <a
-          href="https://workeee.vercel.app/prihlaseni"
-          className="inline-flex h-10 items-center rounded border border-slate-300 px-4 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-100"
-        >
-          Otevřít aplikaci
-        </a>
-      </div>
-    </main>
+    <>
+      <Nav page="not-found" />
+      <main>
+        <PageHead title="Tady nic není" lead="Stránka na této adrese neexistuje. Zkuste úvodní stránku nebo historii změn." />
+        <div className="wrap flex flex-wrap justify-center gap-3 pb-24 lg:pb-32">
+          <ButtonLink href="/">Na úvodní stránku</ButtonLink>
+          <ButtonLink href={CHANGES_HREF} tone="white" className="shadow-[inset_0_0_0_1px_rgb(17_17_19/0.18)]">
+            Historie změn
+          </ButtonLink>
+        </div>
+      </main>
+      <Footer page="not-found" />
+    </>
   );
 }

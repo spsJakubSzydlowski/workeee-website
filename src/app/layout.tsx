@@ -1,49 +1,41 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import {
-  OPEN_GRAPH_BASE,
-  SITE_DESCRIPTION,
-  SITE_NAME,
-  SITE_TITLE,
-  SITE_URL,
-  SOCIAL_IMAGE,
-} from "@/lib/site";
-import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import { Urbanist } from "next/font/google";
+import type { ReactNode } from "react";
+import { OG_IMAGE } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/site-url";
+import { SITE } from "@/lib/workeee";
+import "./vyber.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin", "latin-ext"],
-});
+// One variable file covers the 90 px headline and the 16 px text. Czech
+// diacritics need the latin-ext subset.
+const urbanist = Urbanist({ subsets: ["latin", "latin-ext"], variable: "--font-urbanist" });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin", "latin-ext"],
-});
-
+// The defaults; each page sets its own title, description and canonical
+// address (pageMetadata in src/lib/metadata.ts).
 export const metadata: Metadata = {
-  // Relative URLs in metadata (canonical, social images) resolve against this.
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: SITE_TITLE,
-    template: `%s | ${SITE_NAME}`,
-  },
-  description: SITE_DESCRIPTION,
-  applicationName: SITE_NAME,
+  metadataBase: SITE_URL,
+  title: SITE.title,
+  description: SITE.description,
+  applicationName: SITE.name,
   openGraph: {
-    ...OPEN_GRAPH_BASE,
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
+    type: "website",
+    locale: "cs_CZ",
+    siteName: SITE.name,
+    title: SITE.title,
+    description: SITE.description,
+    images: [OG_IMAGE],
   },
-  twitter: { card: "summary_large_image", images: [SOCIAL_IMAGE] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE] },
 };
+// The sky of the hero is the first thing under the browser chrome.
+export const viewport: Viewport = { themeColor: "#599ad2" };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="cs"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="cs" className={urbanist.variable}>
+      <body className="font-sans">
+        {children}
+      </body>
     </html>
   );
 }

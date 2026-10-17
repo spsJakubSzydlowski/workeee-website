@@ -1,0 +1,25 @@
+/* Shared by every design variant: document defaults and the focus ring. */
+@layer base {
+  html {
+    font-optical-sizing: auto;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Each variant sets --focus to a colour that stays visible on its backgrounds. */
+  :focus-visible {
+    outline: 2px solid var(--focus, currentColor);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
